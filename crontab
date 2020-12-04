@@ -1,0 +1,25 @@
+# Update regex block list every Monday at 0230
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+30 2 * * 1 /usr/bin/curl -sSl https://raw.githubusercontent.com/mmotti/pihole-regex/master/install.py | /usr/bin/python3
+
+# Update regex block list every Monday at 0240
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+40 2 * * 1 /usr/bin/curl -sSl https://raw.githubusercontent.com/MarkDarwin/pihole-regex/master/install.py | /usr/bin/python3
+
+# Update pihole version every night at 0250
+50 2 * * * sudo pihole -up
+
+# Update pihole every night at 0300
+0 3 * * * sudo pihole updateGravity >/dev/null 2>&1
+
+# Update applications and operatingsystem at 0500 daily
+0 5 * * * sudo -- sh -c 'apt-get update; apt-get upgrade -y; apt-get dist-upgrade -y; apt-get autoremove -y; apt-get autoclean -y'
+
+
+# Update inky every 10 minutes - only needed if we have setup the inky display
+*/10 * * * * python /home/pi/inky-hole/main.py
+
+# Update youtube ad hosts every minute
+* * * * * /home/pi/youtube-updater-for-pi-hole/youtube.update.sh 2>&1
