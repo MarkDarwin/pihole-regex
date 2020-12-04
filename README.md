@@ -1,3 +1,6 @@
+Forked from: https://github.com/mmotti/pihole-regex
+All credit goes to mmotti
+
 ## Regex Filters for Pi-hole
 This is a custom regex filter file for use with Pi-hole v4+ (FTLDNS).
 
